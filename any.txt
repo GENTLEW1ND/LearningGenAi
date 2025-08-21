@@ -1,0 +1,4 @@
+curl -H "Authorization: Bearer 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" https://huggingface.co/api/models/mistralai/Mistral-7B-Instruct-v0.2
+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 - read
+
+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 - fine-graind
