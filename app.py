@@ -1,22 +1,25 @@
 from langchain_huggingface import HuggingFaceEndpoint
+from langchain_huggingface.chat_models import ChatHuggingFace
 from dotenv import load_dotenv
 import streamlit as st
 import os
 
 # load env variables first
-load_dotenv()
-# mytoken = os.getenv("HUGGINGFACEHUB_API_TOKEN")
+load_dotenv(".env")
+mytoken = "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"
+
 
 def get_huggingai_response(question):
     # create Hugging Face model after env is loaded
     llm = HuggingFaceEndpoint(
-        repo_id="mistralai/Mistral-7B-v0.1",
+        repo_id="openai/gpt-oss-120b",
         task="text-generation",
         temperature=0.7,
         max_new_tokens=200,
-        huggingfacehub_api_token=os.getenv("HUGGINGFACEHUB_API_TOKEN")
     )
-    return llm(question)
+    chatmodel = ChatHuggingFace(llm=llm)
+    response = chatmodel.invoke(question)
+    return response
 
 st.set_page_config(page_title="Q&A Demo")
 st.header("Langchain Application")
